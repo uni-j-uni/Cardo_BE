@@ -19,10 +19,10 @@
 
 ## 🤩 팀원들(Team Members)
 
-|                Lead                 |             BE Developer             |
-|:-----------------------------------:|:------------------------------------:|
-| [윤희준](https://github.com/uni-j-uni) | [강예린](https://github.com/rkddpfls02) |
-|     <img src="" width="300" />      |      <img src="" width="300" />      |
+|                                      Lead                                       |                                  BE Developer                                   |
+|:-------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------:|
+|                       [윤희준](https://github.com/uni-j-uni)                       |                      [강예린](https://github.com/rkddpfls02)                       |
+| <img src="https://avatars.githubusercontent.com/u/118972548?v=4" width="300" /> | <img src="https://avatars.githubusercontent.com/u/140104885?v=4" width="300" /> |
 
 ## 🛠️ 기술 스택(Tech)
 ![Spring Boot](https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)
