@@ -1,0 +1,3 @@
+[submodule "BackEnd_Config"]
+	path = BackEnd_Config
+	url = https://github.com/Trendithon-Omnivore/BackEnd_Config.git

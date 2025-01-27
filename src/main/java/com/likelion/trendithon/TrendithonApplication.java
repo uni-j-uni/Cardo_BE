@@ -9,5 +9,4 @@ public class TrendithonApplication {
   public static void main(String[] args) {
     SpringApplication.run(TrendithonApplication.class, args);
   }
-
 }

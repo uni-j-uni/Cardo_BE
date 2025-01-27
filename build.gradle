@@ -79,3 +79,10 @@ tasks.register('copyResources', Copy) {
     include '*.properties'
     into 'src/main/resources/'
 }
+
+test {
+    doFirst {
+        def profile = project.hasProperty('profile') ? project.property('profile').toString() : 'local'
+        jvmArgs = ["-Dspring.profiles.active=${profile}"]
+    }
+}
