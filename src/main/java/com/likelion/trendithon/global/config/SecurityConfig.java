@@ -2,11 +2,14 @@ package com.likelion.trendithon.global.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HttpBasicConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -45,14 +48,9 @@ public class SecurityConfig {
                         "/v3/api-docs/**" // API 문서
                         )
                     .permitAll()
-                    // 관리자 권한이 필요한 경로 설정
-                    // .requestMatchers(HttpMethod.POST, "/api/**")
-                    // .hasRole("ADMIN")
                     // 로그인이 필요한 경로 설정
-                    // .requestMatchers(HttpMethod.POST, "/api/**")
-                    // .hasRole("GUEST")
-                    .requestMatchers("/api/admin/**")
-                    .hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.POST, "/api/**")
+                    .hasRole("USER")
                     // 그 외 모든 요청은 인증 필요
                     .anyRequest()
                     .authenticated());
@@ -65,8 +63,8 @@ public class SecurityConfig {
   public CorsConfigurationSource corsConfigurationSource() {
     CorsConfiguration configuration = new CorsConfiguration();
     // 모든 출처 허용
-    configuration.addAllowedOrigin("https://likelion-sku.netlify.app");
     configuration.addAllowedOrigin("http://localhost:5173"); // 개발 서버
+    configuration.addAllowedOrigin("https://localhost:5173"); // 배포 서버
     // 모든 HTTP 메서드 허용
     configuration.addAllowedMethod("*");
     // 모든 헤더 허용
@@ -79,5 +77,11 @@ public class SecurityConfig {
     source.registerCorsConfiguration("/**", configuration);
 
     return source;
+  }
+
+  /** 비밀번호 인코더 Bean 등록 */
+  @Bean
+  public PasswordEncoder passwordEncoder() {
+    return new BCryptPasswordEncoder();
   }
 }

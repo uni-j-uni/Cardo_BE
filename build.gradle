@@ -45,6 +45,11 @@ dependencies {
     // Spring-security
     implementation 'org.springframework.boot:spring-boot-starter-security'
     testImplementation 'org.springframework.security:spring-security-test'
+
+    // Jwt Token
+    implementation group:'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.5'
+    implementation group:'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.5'
+    implementation group:'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.5'
 }
 
 tasks.named('compileJava') {
