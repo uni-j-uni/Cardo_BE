@@ -45,8 +45,8 @@ public class SecurityConfig {
                         "/",
                         "/api/**", // 테스트용 모든 API 열어놓음. 나중에 삭제
                         "/swagger-ui/**", // Swagger UI
-                        "/v3/api-docs/**" // API 문서
-                        )
+                        "/v3/api-docs/**", // API 문서
+                        "/api/cards/**")
                     .permitAll()
                     // 로그인이 필요한 경로 설정
                     .requestMatchers(HttpMethod.POST, "/api/**")
