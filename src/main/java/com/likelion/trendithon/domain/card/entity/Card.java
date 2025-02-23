@@ -10,8 +10,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
-import com.likelion.trendithon.domain.tag.entity.Tag;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -30,18 +28,21 @@ public class Card {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long cardId;
 
+  @Column(name = "created_by")
+  private String loginId;
+
+  @Column(name = "emoji")
+  private String emoji;
+
   @Column(name = "title", nullable = false)
   private String title;
 
   @Column(name = "content", nullable = false)
   private String content;
 
-  @Column(name = "imgUrl")
-  private String imgUrl;
-
-  @Column(name = "user_id")
-  private String userId;
+  @Column(name = "cover", nullable = false)
+  private String cover;
 
   @OneToMany(mappedBy = "card", cascade = CascadeType.ALL, orphanRemoval = true)
-  private List<Tag> TagItems = new ArrayList<>();
+  private List<UserCard> userCardList = new ArrayList<>();
 }
