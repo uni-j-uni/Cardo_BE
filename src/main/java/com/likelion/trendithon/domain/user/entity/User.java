@@ -10,7 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
-import com.likelion.trendithon.domain.card.entity.UserCard;
+import com.likelion.trendithon.domain.card.entity.Experience;
 import com.likelion.trendithon.global.common.BaseTimeEntity;
 
 import lombok.AllArgsConstructor;
@@ -47,5 +47,5 @@ public class User extends BaseTimeEntity {
   private String userRole;
 
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-  private List<UserCard> userCardList = new ArrayList<>();
+  private List<Experience> experienceList = new ArrayList<>();
 }

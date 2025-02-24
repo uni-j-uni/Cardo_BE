@@ -31,9 +31,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class CardService {
 
-  private CardRepository cardRepository;
-  private UserRepository userRepository;
-  private JwtUtil jwtUtil;
+  private final CardRepository cardRepository;
+  private final UserRepository userRepository;
+  private final JwtUtil jwtUtil;
 
   // 카드 생성
   @Transactional
@@ -79,6 +79,33 @@ public class CardService {
     }
   }
 
+  // 카드 한 장 조회
+  @Transactional
+  public ResponseEntity<CardResponse> getCardById(Long id) {
+
+    try {
+      Card card =
+          cardRepository
+              .findById(id)
+              .orElseThrow(() -> new IllegalArgumentException("카드를 찾을 수 없습니다."));
+      log.info("[GET /api/cards/{}] 특정 카드 조회 성공 - 조회한 카드 ID: {}", id, id);
+      return ResponseEntity.ok(
+          CardResponse.builder()
+              .success(true)
+              .message("카드 조회에 성공하였습니다.")
+              .cardId(card.getCardId())
+              .build());
+    } catch (IllegalArgumentException e) {
+      log.error("[GET /api/cards/{}] 특정 카드 조회 실패", id);
+      return ResponseEntity.ok(
+          CardResponse.builder().success(false).message(e.getMessage()).build());
+    } catch (Exception e) {
+      log.error("[GET /api/cards/{}] 특정 카드 조회 실패 - 에러: {}", id, e.getMessage());
+      return ResponseEntity.ok(
+          CardResponse.builder().success(false).message("카드 조회 중 오류가 발생하였습니다.").build());
+    }
+  }
+
   // 랜덤 카드 세 장 조회
   @Transactional
   public ResponseEntity<RandomCardResponse> getRandomCards() {
@@ -115,31 +142,7 @@ public class CardService {
               .build());
     }
   }
-
-  // 카드 한 장 조회
-  @Transactional
-  public ResponseEntity<CardResponse> getCardById(Long id) {
-
-    try {
-      Card card =
-          cardRepository
-              .findById(id)
-              .orElseThrow(() -> new IllegalArgumentException("카드를 찾을 수 없습니다."));
-      log.info("[GET /api/cards/{}] 특정 카드 조회 성공 - 조회한 카드 ID: {}", id, id);
-      return ResponseEntity.ok(
-          CardResponse.builder().success(true).message("카드 조회에 성공하였습니다.").card(card).build());
-    } catch (IllegalArgumentException e) {
-      log.error("[GET /api/cards/{}] 특정 카드 조회 실패", id);
-      return ResponseEntity.ok(
-          CardResponse.builder().success(false).message(e.getMessage()).build());
-    } catch (Exception e) {
-      log.error("[GET /api/cards/{}] 특정 카드 조회 실패 - 에러: {}", id, e.getMessage());
-      return ResponseEntity.ok(
-          CardResponse.builder().success(false).message("카드 조회 중 오류가 발생하였습니다.").build());
-    }
-  }
-
-  // 모든 카드 조회
+  
   @Transactional
   public ResponseEntity<CardListResponse> getAllCards() {
     try {

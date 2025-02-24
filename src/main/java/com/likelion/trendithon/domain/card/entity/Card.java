@@ -44,5 +44,5 @@ public class Card {
   private String cover;
 
   @OneToMany(mappedBy = "card", cascade = CascadeType.ALL, orphanRemoval = true)
-  private List<UserCard> userCardList = new ArrayList<>();
+  private List<Experience> experienceList = new ArrayList<>();
 }

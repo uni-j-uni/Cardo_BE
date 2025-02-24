@@ -16,6 +16,6 @@ public class CardResponse {
   @Schema(description = "응답 메세지", example = "카드 조회에 성공하였습니다.")
   private String message;
 
-  @Schema(description = "카드")
-  private Card card;
+  @Schema(description = "조회한 카드 ID", example = "1")
+  private Long cardId;
 }
